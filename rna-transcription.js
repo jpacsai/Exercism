@@ -16,24 +16,22 @@ A -> U
 
 */
 
-export const toRna = (dna) => {
-    return dna.split('').map((n) => {
-      if (['G', 'C', 'T', 'A', ''].includes(n)) {
-        switch (n) {
-          case 'G':
-            return 'C';
-          case 'C':
-            return 'G';
-          case 'T':
-            return 'A';
-          case 'A':
-            return 'U';
-          default:
-            return '';
-        }
-      } else {
-        throw new Error('Invalid input DNA.');
+export const toRna = dna => dna.split('').map((n) => {
+    if (['G', 'C', 'T', 'A', ''].includes(n)) {
+      switch (n) {
+        case 'G':
+          return 'C';
+        case 'C':
+          return 'G';
+        case 'T':
+          return 'A';
+        case 'A':
+          return 'U';
+        default:
+          return '';
       }
-    }).join('');
-  };
+    } else {
+      throw new Error('Invalid input DNA.');
+    }
+}).join('');
   
