@@ -15,22 +15,23 @@ And if you ask for a 6-digit series from a 5-digit string, you deserve whatever 
 Note that these series are only required to occupy adjacent positions in the input; the digits need not be numerically consecutive.
 */
 
-class Series {
+export class Series {
   constructor(str) {
     this.digits = str.split('').map(c => Number(c));
   }
 
   slices(num) {
-    if (num > this.digits.length) {
-      throw new Error('Slice size is too big.');
-    } else {
-      const arr = [];
-      for (let i = num; i < this.digits.length + 1; i += 1) {
-        arr.push(this.digits.slice(i - num, i));
-      }
-      return arr;
-    }
+    const { digits } = this;
+
+    if (num > digits.length) throw new Error('Slice size is too big.');
+
+    const result = digits.reduce((total, n, index, arr) => {
+      if (index + num > digits.length) return total;
+
+      const currentSlice = arr.slice(index, index + num);
+      return [...total, currentSlice];
+    }, []);
+
+    return result;
   }
 }
-
-export default Series;
